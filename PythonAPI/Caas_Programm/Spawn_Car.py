@@ -42,7 +42,7 @@ def main():
     spawn_points = world.get_map().get_spawn_points()
     spawn_point = random.choice(spawn_points)
     vehicle = random.choice(world.get_blueprint_library().filter('vehicle.*'))
-    actor = world.try_spawn_actor(vehicle, spawn_point)
+    actor = world.spawn_actor(vehicle, spawn_point)
    
     #transform = carla.Transform(carla.Location(x=230, y=195, z=40), carla.Rotation(yaw=180))
     #world.spawn_actor(vehicle, transform)
@@ -50,8 +50,8 @@ def main():
     location = actor.get_location()
     print(location)
     
-    location.z += 10.0
-    actor.set_location(location)
+    #location.y += 10.0
+    #actor.set_location(location)
     print(actor.get_acceleration())
     print(actor.get_velocity())
     

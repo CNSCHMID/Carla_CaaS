@@ -36,17 +36,19 @@ from numpy import random
 def main():
 
     client = carla.Client('localhost', 2000)
+    client.set_timeout(500.0)
     world = client.get_world()
+    
     
 
     spawn_points = world.get_map().get_spawn_points()
     spawn_point = random.choice(spawn_points)
-    vehicle = random.choice(world.get_blueprint_library().filter('vehicle.*'))
+    vehicle = random.choice(world.get_blueprint_library().filter('vehicle.bmw.*'))
     actor = world.spawn_actor(vehicle, spawn_point)
    
     #transform = carla.Transform(carla.Location(x=230, y=195, z=40), carla.Rotation(yaw=180))
-    #world.spawn_actor(vehicle, transform)
-
+    #actor = world.spawn_actor(vehicle, transform)
+    time.sleep(5)
     location = actor.get_location()
     print(location)
     
@@ -54,6 +56,7 @@ def main():
     #actor.set_location(location)
     print(actor.get_acceleration())
     print(actor.get_velocity())
+    
     
 
 if __name__ == '__main__':

@@ -41,13 +41,13 @@ def main():
     
     
 
-    spawn_points = world.get_map().get_spawn_points()
-    spawn_point = random.choice(spawn_points)
+    #spawn_points = world.get_map().get_spawn_points()
+    #spawn_point = random.choice(spawn_points)
     vehicle = random.choice(world.get_blueprint_library().filter('vehicle.bmw.*'))
-    actor = world.spawn_actor(vehicle, spawn_point)
+    #actor = world.spawn_actor(vehicle, spawn_point)
    
-    #transform = carla.Transform(carla.Location(x=230, y=195, z=40), carla.Rotation(yaw=180))
-    #actor = world.spawn_actor(vehicle, transform)
+    transform = carla.Transform(carla.Location( x=37.622948, y= -4.078316, z=0.180277), carla.Rotation(yaw=180))
+    actor = world.try_spawn_actor(vehicle, transform)
     time.sleep(5)
     location = actor.get_location()
     print(location)
@@ -59,6 +59,12 @@ def main():
     print(actor.get_velocity())
     
     
+    #Spawn Walker
+
+    blueprint = random.choice(world.get_blueprint_library().filter('walker.*'))
+    transform = carla.Transform(carla.Location(x=37.622948, y= 0.078316, z=0.180277), carla.Rotation(yaw=180))
+    walker = world.try_spawn_actor(blueprint, transform)
+
 
 if __name__ == '__main__':
 

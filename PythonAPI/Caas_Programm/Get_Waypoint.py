@@ -14,6 +14,7 @@ import sys
 import time
 
 
+
 try:
     sys.path.append(glob.glob('../carla/dist/carla-*%d.%d-%s.egg' % (
         sys.version_info.major,
@@ -26,7 +27,9 @@ import carla
 import random
 
 
+
 from carla import VehicleLightState as vls
+#from agents.navigation.controller import VehiclePIDController
 
 import argparse
 import logging
@@ -36,23 +39,24 @@ def main():
 
     client = carla.Client('localhost', 2000)
     world = client.get_world()
-
     
-    
-    # add a camera
-        camera_class = blueprint_library.find('sensor.camera.rgb')
-        camera_class.set_attribute('image_size_x', '600')
-        camera_class.set_attribute('image_size_y', '600')
-        camera_class.set_attribute('fov', '90')
-        camera_class.set_attribute('sensor_tick', '0.1')
-        cam_transform1 = carla.Transform(carla.Location(x=1.8, z=1.3))
-        # cam_transform2 = cam_transform1 + carla.Location(y=0.54)
 
-        # # spawn camera to hero
-        camera1 = world.spawn_actor(camera_class, cam_transform1, attach_to=hero)
-        actor_list.append(camera1)
-        # camera2 = world.spawn_actor(camera_class, cam_transform2, attach_to=hero)
-        # actor_list.append(camera2)
+    map = world.get_map()
+    vehicle = world.get_actor(88)
+    waypoint = map.get_waypoint(vehicle.get_location())
+    print(waypoint)
+    
+
+    #custom_controller = VehiclePIDController(vehicle, args_lateral = {'K_P': 1, 'K_D': 0.0, 'K_I': 0}, args_longitudinal = {'K_P': 1, 'K_D': 0.0, 'K_I': 0.0})
+	
+    vehicle2 = world.get_actor(86)
+    vehicle2.set_autopilot(True)
+    vehicle2.set_transform(waypoint.transform)
+
+    #control_signal = custom_controller.run_step(1, waypoint)
+    #vehicle.apply_control(control_signal)
+    
+
 
 if __name__ == '__main__':
 

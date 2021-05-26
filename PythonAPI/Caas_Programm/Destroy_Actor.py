@@ -36,23 +36,11 @@ def main():
 
     client = carla.Client('localhost', 2000)
     world = client.get_world()
-
     
-    
-    # add a camera
-        camera_class = blueprint_library.find('sensor.camera.rgb')
-        camera_class.set_attribute('image_size_x', '600')
-        camera_class.set_attribute('image_size_y', '600')
-        camera_class.set_attribute('fov', '90')
-        camera_class.set_attribute('sensor_tick', '0.1')
-        cam_transform1 = carla.Transform(carla.Location(x=1.8, z=1.3))
-        # cam_transform2 = cam_transform1 + carla.Location(y=0.54)
+    vehicle = world.get_actor(86)
+    carla.command.DestroyActor(vehicle) 
 
-        # # spawn camera to hero
-        camera1 = world.spawn_actor(camera_class, cam_transform1, attach_to=hero)
-        actor_list.append(camera1)
-        # camera2 = world.spawn_actor(camera_class, cam_transform2, attach_to=hero)
-        # actor_list.append(camera2)
+
 
 if __name__ == '__main__':
 

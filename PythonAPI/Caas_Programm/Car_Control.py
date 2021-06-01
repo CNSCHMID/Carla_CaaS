@@ -42,7 +42,7 @@ def main():
     print(vehicle.get_location())
 
     vehicle.set_autopilot(True)
-    vehicle.apply_control(carla.VehicleControl(throttle=1.0, steer= -1.0))
+    #vehicle.apply_control(carla.VehicleControl(throttle=1.0, steer= -1.0))
 
    
 

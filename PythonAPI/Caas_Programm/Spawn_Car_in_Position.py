@@ -61,9 +61,9 @@ def main():
     
     #Spawn Walker
 
-    blueprint = random.choice(world.get_blueprint_library().filter('walker.*'))
-    transform = carla.Transform(carla.Location(x=37.622948, y= 0.078316, z=0.180277), carla.Rotation(yaw=180))
-    walker = world.try_spawn_actor(blueprint, transform)
+    #blueprint = random.choice(world.get_blueprint_library().filter('walker.*'))
+    #transform = carla.Transform(carla.Location(x=37.622948, y= 0.078316, z=0.180277), carla.Rotation(yaw=180))
+    #walker = world.try_spawn_actor(blueprint, transform)
 
 
 if __name__ == '__main__':

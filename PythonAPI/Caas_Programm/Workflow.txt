@@ -1,0 +1,11 @@
+cd C:\Carla\PythonAPI\Caas_Programm
+
+py -3.7 Spawn_Car_in_Position.py
+py -3.7 Spawn_Car.py
+py -3.7 Get_Waypoint.py
+py -3.7 Drive_controller.py
+
+
+ALL in One:
+
+py -3.7 CaaS_All_in_One.py

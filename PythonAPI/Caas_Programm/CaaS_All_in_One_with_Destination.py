@@ -103,14 +103,14 @@ def main():
 
     #Start Car
     vehicle1.set_simulate_physics(True)
-    driving_car = BasicAgent(vehicle1, target_speed=100)
+    driving_car = BasicAgent(vehicle1, target_speed=200)
     destiny = carla.Location(spawn_point2.location)
     driving_car.set_destination((destiny.x, destiny.y, destiny.z))
 
     #vehicle1.set_autopilot(True)
 
-    x_destiny = round(destiny.x,0)
-    y_destiny = round(destiny.y,0)
+    x_destiny = int(destiny.x)
+    y_destiny = int(destiny.y)
     z_destiny = round(destiny.z,0)
     print("Standing location:")
     print("x_standing_location: ", x_destiny)
@@ -120,17 +120,25 @@ def main():
 
     moving_location =  vehicle1.get_location()
 
-    x_moving_location =  round(moving_location.x,0)
-    y_moving_location =  round(moving_location.y,0)
-    z_moving_location =  round(moving_location.z,0)
+    #x_moving_location =  round(moving_location.x,0)
+    #y_moving_location =  round(moving_location.y,0)
+    #z_moving_location =  round(moving_location.z,0)
+    x_moving_location =  int(moving_location.x)
+    y_moving_location =  int(moving_location.y)
+    z_moving_location =  int(moving_location.z)
 
     print("Moving location:")
     print("x_moving_location: ", x_moving_location)
     print("y_moving_location: ", y_moving_location)
     print("z_moving_location: ", z_moving_location)
-    vehicle2.destroy()
+    a = x_destiny == x_moving_location
+    b = y_destiny == y_moving_location 
+    c = a and b
+    d = vehicle1.get_velocity == 0
+    e = c and d
 
-    while x_destiny in range(x_moving_location, x_moving_location + 5.0) or y_destiny in range(y_moving_location, y_moving_location + 5.0):
+    #while x_destiny in range(x_moving_location, x_moving_location + 5) or y_destiny in range(y_moving_location, y_moving_location + 5):
+    while e:
             world.tick()
             ts = world.wait_for_tick()
 
@@ -138,9 +146,18 @@ def main():
             control_hero = driving_car.run_step()
             vehicle1.apply_control(control_hero)
             moving_location = vehicle1.get_location()
-            x_moving_location =  round(moving_location.x,0)
-            y_moving_location =  round(moving_location.y,0)
-            z_moving_location =  round(moving_location.z,0)
+            #x_moving_location =  round(moving_location.x,0)
+            #y_moving_location =  round(moving_location.y,0)
+            #z_moving_location =  round(moving_location.z,0)
+            x_moving_location =  int(moving_location.x)
+            y_moving_location =  int(moving_location.y)
+            z_moving_location =  int(moving_location.z)
+
+            a = x_destiny != x_moving_location
+            b = y_destiny != y_moving_location 
+            c = a and b
+            d = vehicle1.get_velocity != 0
+            e = c and d
 
             print("Standing location:")
             print("x_standing_location: ", x_destiny)
@@ -154,9 +171,9 @@ def main():
 
             
 
-            if frame is not None:
-                if ts.frame_count != frame + 1:
-                    logging.warning('frame skip!')
+            #if frame is not None:
+                #if ts.frame_count != frame + 1:
+                    #logging.warning('frame skip!')
                     #print("frame skip!")
         
 

@@ -8,7 +8,25 @@ py -3.7 Drive_controller.py
 
 ALL in One:
 
+---
 py -3.7 CaaS_All_in_One.py
+py -3.7 CaaS_All_in_One_Transport_Request.py
+---
+
+---
+py -3.7 CaaS_All_in_One_with_Destination.py
+---
+
+--
+py -3.7 Caas_recieve_actor_request.py
+py -3.7 Caas_send_actor_data.py
+--
+
+NEW (18.06.2021):
+py -3.7 CaaS_All_in_One.py
+py -3.7 Caas_send_actor_data.py
+py -3.7 Caas_recieve_actor_request.py
+
 
 Next:
 - Transport User
@@ -24,4 +42,14 @@ python paho -> Library to resieve MQTT Messages
 http://www.hivemq.com/demos/websocket-client/?
 
 
-py -3.7 CaaS_All_in_One_with_Destination.py
+!Send: Cars!
+Send: Persons
+Request: Where is Person
+
+topic/car/data -> Datenübertragung an Brian  | { "name": "Lambo", "message": "need_car", "state": "not_availabe", "location": "X", "distance": "5" }
+					       { "name": "Lambo", "message": "need_car", "state": "not_availabe", "location": "X", "distance": "5" }
+topic/person/data -> Datenübertragung an Brian 
+
+topic/transport/request -> Brian sagt welche Person will vom welchem Auto abgeholt werden und wohin. { "vehicle1_id": "86", "vehicle2_id": "87", "destination": "100" }
+
+

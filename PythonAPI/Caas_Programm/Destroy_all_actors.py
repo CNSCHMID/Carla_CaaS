@@ -36,9 +36,19 @@ def main():
 
     client = carla.Client('localhost', 2000)
     world = client.get_world()
-    
-    vehicle = world.get_actor(86)
-    carla.command.DestroyActor(vehicle) 
+
+    actor_list = []
+
+    i = 86
+
+    while i < 110:
+        actor_list.append(world.get_actor(i))
+        i = i + 1
+
+
+    for actor in actor_list:
+        if actor != None:
+            actor.destroy()
 
 
 

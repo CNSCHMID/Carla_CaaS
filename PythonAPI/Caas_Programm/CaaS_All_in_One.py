@@ -60,7 +60,7 @@ def main():
     model2 = random.choice(world.get_blueprint_library().filter('vehicle.bmw.*'))
 
     spawn_points = world.get_map().get_spawn_points()
-    spawn_point_numeric_value1 = randrange(300)
+    spawn_point_numeric_value1 = randrange(250)
     print("Spawpoint 1: ")
     print(spawn_point_numeric_value1)
     spawn_point1 = spawn_points[spawn_point_numeric_value1]
@@ -71,7 +71,7 @@ def main():
     print(location1)
     print(vehicle1.id)
 
-    spawn_point_numeric_value2 = randrange(300)
+    spawn_point_numeric_value2 = randrange(250)
     print("Spawpoint 2: ")
     print(spawn_point_numeric_value2)
     spawn_point2 = spawn_points[spawn_point_numeric_value2]
@@ -103,27 +103,31 @@ def main():
 
     #Start Car
     vehicle1.set_simulate_physics(True)
-    driving_car = BasicAgent(vehicle1, target_speed=50)
+    driving_car = BasicAgent(vehicle1, target_speed=200)
     destiny = spawn_point2.location
     driving_car.set_destination((destiny.x, destiny.y, destiny.z))
 
     #vehicle1.set_autopilot(True)
 
-    
+    vehicle1_waypoint = amap.get_waypoint(vehicle1.get_location())
+    vehicle2_waypoint = amap.get_waypoint(vehicle2.get_location())
 
-    while True:
+    while vehicle2_waypoint != vehicle1_waypoint:
             world.tick()
             ts = world.wait_for_tick()
+            vehicle1_waypoint = amap.get_waypoint(vehicle1.get_location())
 
+            print("Vehicle 1 Waypoint: " + str(vehicle1_waypoint))
+            print("Vehicle 2 Waypoint: " + str(vehicle2_waypoint))
             # Get control commands
             control_hero = driving_car.run_step()
             vehicle1.apply_control(control_hero)
 
-            if frame is not None:
-                if ts.frame_count != frame + 1:
-                    logging.warning('frame skip!')
-                    print("frame skip!")
-
+                #if frame is not None:
+                    #if ts.frame_count != frame + 1:
+                        #logging.warning('frame skip!')
+                        #print("frame skip!")
+                
             frame = ts.frame_count
 
     

@@ -79,6 +79,8 @@ def main():
             control_hero = driving_car.run_step()
             vehicle2.apply_control(control_hero)
 
+            
+
             if frame is not None:
                 if ts.frame_count != frame + 1:
                     logging.warning('frame skip!')
